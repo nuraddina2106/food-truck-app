@@ -1,0 +1,178 @@
+/* style.css */
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f0f0f0;
+    transition: margin-left 0.3s;
+}
+.header {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    flex-grow: 1;
+}
+.header .menu-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+.header .logout-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+/* Navigation Drawer Styles */
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hide the drawer off-screen */
+    background-color: #333;
+    color: #fff;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 2; /* Ensure drawer is on top of content but below header */
+}
+.sidenav .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+.sidenav .closebtn {
+    font-size: 36px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+.sidenav a {
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #f0f0f0;
+    display: block;
+    transition: 0.3s;
+}
+.sidenav a:hover {
+    color: #007bff; /* Highlight on hover */
+}
+.sidenav.show {
+    left: 0; /* Show the drawer */
+}
+#main {
+    transition: margin-left 0.3s;
+    padding: 20px;
+    margin-top: 60px; /* Space for fixed header */
+}
+#main.shift {
+    margin-left: 250px; /* Adjust content margin when drawer is open */
+}
+
+/* Form Styles */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+.form-container input, .form-container textarea {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+.form-container button {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+.form-container button:hover {
+    background-color: #0056b3;
+}
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Existing CSS styles */
+
+/* Additional button styles */
+.button-edit {
+    background-color: #28a745; /* Green for Edit button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.button-edit:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.button-delete {
+    background-color: #dc3545; /* Red for Delete button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.button-delete:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.form-container {
+    display: inline;
+}
+
+.form-container button {
+    padding: 10px 20px;
+    margin: 0;
+}

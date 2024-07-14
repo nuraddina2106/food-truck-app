@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Truck Admin</title>
+</head>
+<body>
+    <h1>Food Truck Admin Panel</h1>
+    <form action="submit_food_truck.php" method="post">
+        <h2>Food Truck Details</h2>
+        <label for="business_type">Business Type:</label><br>
+        <input type="text" id="business_type" name="business_type"><br>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="operator_name">Operator Name:</label><br>
+        <input type="text" id="operator_name" name="operator_name"><br>
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br>
+        <label for="business_hours">Business Hours:</label><br>
+        <input type="text" id="business_hours" name="business_hours"><br>
+        <label for="latitude">Latitude:</label><br>
+        <input type="text" id="latitude" name="latitude"><br>
+        <label for="longitude">Longitude:</label><br>
+        <input type="text" id="longitude" name="longitude"><br>
+        <label for="image">Image URL:</label><br>
+        <input type="text" id="image" name="image"><br><br>
+        <input type="submit" value="Submit Food Truck">
+    </form>
+
+    <hr>
+
+    <form action="submit_menu.php" method="post">
+        <h2>Menu Item Details</h2>
+        <label for="food_truck_id">Food Truck ID:</label><br>
+        <input type="text" id="food_truck_id" name="food_truck_id"><br>
+        <label for="menu_name">Menu Name:</label><br>
+        <input type="text" id="menu_name" name="menu_name"><br>
+        <label for="menu_desc">Menu Description:</label><br>
+        <textarea id="menu_desc" name="menu_desc"></textarea><br>
+        <label for="menu_price">Menu Price:</label><br>
+        <input type="text" id="menu_price" name="menu_price"><br>
+        <label for="menu_image">Menu Image URL:</label><br>
+        <input type="text" id="menu_image" name="menu_image"><br><br>
+        <input type="submit" value="Submit Menu Item">
+    </form>
+</body>
+</html>
