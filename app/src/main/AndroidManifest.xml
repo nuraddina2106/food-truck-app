@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA5B7S8Jar38PuvNR2wRpDjOa44KeANmC4"/> <!-- Your API Key -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -24,11 +28,7 @@
 
         <activity
             android:name=".AboutUsActivity"
-            android:exported="true" /> <!-- Add this line for AboutUsActivity -->
+            android:exported="true"/>
 
     </application>
-
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyA5B7S8Jar38PuvNR2wRpDjOa44KeANmC4"/> <!-- Your API Key -->
 </manifest>
