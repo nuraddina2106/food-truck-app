@@ -20,7 +20,7 @@ while ($row = $result->fetch_assoc()) {
     $menu_items[] = $row;
 }
 
+// Return JSON response
+header('Content-Type: application/json');
 echo json_encode($menu_items);
-$stmt->close();
-$conn->close();
 ?>

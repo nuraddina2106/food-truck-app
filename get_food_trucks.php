@@ -2,15 +2,13 @@
 // Connect to the database
 include 'connect.php';
 
-// Handle search query
-$search = isset($_GET['search']) ? $_GET['search'] : '';
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Prepare the SQL query
-$sql = "SELECT * FROM food_trucks";
-if ($search) {
-    $sql .= " WHERE name LIKE '%" . $conn->real_escape_string($search) . "%'";
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
+$sql = "SELECT * FROM food_trucks";
 $result = $conn->query($sql);
 
 $food_trucks = array();
