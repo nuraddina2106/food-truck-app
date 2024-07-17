@@ -30,6 +30,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding = true // Enable View Binding for easier UI component access
+    }
 }
 
 dependencies {
@@ -37,10 +41,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.volley)
-    implementation(libs.play.services.maps)
-    implementation("com.google.android.gms:play-services-location:20.0.0") // Add this line for location services
+    implementation("com.android.volley:volley:1.2.1") // Volley for network operations
+    implementation(libs.play.services.maps) // Google Maps API
+    implementation("com.google.android.gms:play-services-location:20.0.0") // Google Location Services
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.squareup.picasso:picasso:2.71828")
 }

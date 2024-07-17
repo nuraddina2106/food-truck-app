@@ -23,4 +23,3 @@ play-services-maps = { group = "com.google.android.gms", name = "play-services-m
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
-

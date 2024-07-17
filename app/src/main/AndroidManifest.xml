@@ -19,6 +19,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:label="Food Truck Mapper"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -27,7 +28,13 @@
         </activity>
 
         <activity
+            android:name=".MapActivity"
+            android:label="Map Activity"
+            android:exported="true"/>
+
+        <activity
             android:name=".AboutUsActivity"
+            android:label="About Us!"
             android:exported="true"/>
 
     </application>
