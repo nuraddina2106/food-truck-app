@@ -42,10 +42,15 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation("com.android.volley:volley:1.2.1") // Volley for network operations
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation(libs.play.services.maps) // Google Maps API
     implementation("com.google.android.gms:play-services-location:20.0.0") // Google Location Services
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+
 }
