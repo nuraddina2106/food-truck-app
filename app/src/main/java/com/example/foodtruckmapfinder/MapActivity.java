@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -20,7 +19,6 @@ import androidx.core.content.ContextCompat;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,7 +31,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -75,7 +72,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             return false;
         });
 
-        // Initialize SearchView and set its listeners
         searchView = findViewById(R.id.action_search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -95,14 +91,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Setup Zoom In button
         findViewById(R.id.zoom_in).setOnClickListener(view -> {
             if (mMap != null) {
                 mMap.animateCamera(CameraUpdateFactory.zoomIn());
             }
         });
 
-        // Setup Zoom Out button
         findViewById(R.id.zoom_out).setOnClickListener(view -> {
             if (mMap != null) {
                 mMap.animateCamera(CameraUpdateFactory.zoomOut());
@@ -120,7 +114,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Position the map to Kangar and add a marker
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KANGAR_LAT_LNG, 14)); // Adjust zoom level as needed
         Marker kangarMarker = mMap.addMarker(new MarkerOptions()
                 .position(KANGAR_LAT_LNG)
@@ -129,20 +122,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         kangarMarker.setTag("kangar"); // Example tag for Kangar marker
 
-        // Set a click listener for the marker
         mMap.setOnMarkerClickListener(marker -> {
-            // Handle marker click events here
+            marker.showInfoWindow();
+            return true;
+        });
+
+        mMap.setOnInfoWindowClickListener(marker -> {
             String truckId = (String) marker.getTag(); // Retrieve truckId from marker tag
             if (truckId != null) {
                 Intent intent = new Intent(MapActivity.this, MenuActivity.class);
                 intent.putExtra("truck_id", truckId); // Pass truckId to MenuActivity
                 startActivity(intent);
-                return true;
             }
-            return false;
         });
 
-        // Set custom info window adapter
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -151,25 +144,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             @Override
             public View getInfoContents(Marker marker) {
-                // Inflate custom layout
                 View v = getLayoutInflater().inflate(R.layout.info_window_layout, null);
 
-                // Find views within custom layout
                 TextView title = v.findViewById(R.id.info_title);
                 TextView snippet = v.findViewById(R.id.info_snippet);
 
-                // Set text to views
+                // Retrieve additional info from marker snippet
+                String[] markerData = marker.getSnippet() != null ? marker.getSnippet().split("\\|") : new String[]{"", "", ""};
+                String operatorName = markerData.length > 0 ? markerData[0] : "Unknown";
+                String menuNames = markerData.length > 1 ? markerData[1] : "No menu available";
+                String businessHours = markerData.length > 2 ? markerData[2] : "No hours available";
+
                 title.setText(marker.getTitle());
-                snippet.setText(marker.getSnippet());
+                snippet.setText("Operator: " + operatorName + "\nMenu: " + menuNames + "\nHours: " + businessHours);
 
                 return v;
             }
         });
 
-        // Request food truck data
         sendRequest();
-
-        // Enable user's location on the map
         enableMyLocation();
     }
 
@@ -193,29 +186,54 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     public Response.Listener<String> onSuccess = response -> {
+        if (response == null || response.isEmpty()) {
+            Log.d("FoodTruck", "Response is null or empty");
+            return;
+        }
+
         FoodTruck[] foodTrucks = gson.fromJson(response, FoodTruck[].class);
+
+        if (foodTrucks == null) {
+            Log.d("FoodTruck", "Parsed foodTrucks is null");
+            return;
+        }
 
         Log.d("FoodTruck", "Number of Food Truck Data Points: " + foodTrucks.length);
 
         for (FoodTruck truck : foodTrucks) {
-            Double latitude = Double.parseDouble(truck.getLatitude());
-            Double longitude = Double.parseDouble(truck.getLongitude());
-            String truckId = truck.getTruckId(); // Assuming the truck ID is retrieved from JSON
-            String title = truck.getName();
-            String snippet = truck.getBusinessType();
+            if (truck == null) {
+                Log.d("FoodTruck", "Encountered null FoodTruck object");
+                continue;
+            }
 
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(new LatLng(latitude, longitude))
-                    .title(title)
-                    .snippet(snippet);
+            try {
+                Double latitude = Double.parseDouble(truck.getLatitude());
+                Double longitude = Double.parseDouble(truck.getLongitude());
+                String truckId = truck.getTruckId(); // Assuming the truck ID is retrieved from JSON
+                String title = truck.getName();
+                String operatorName = truck.getOperatorName() != null ? truck.getOperatorName() : "Unknown";
+                String menuNames = truck.getMenuNames() != null ? String.join(", ", truck.getMenuNames()) : "No menu available";
+                String businessHours = truck.getBusinessHours() != null ? truck.getBusinessHours() : "No hours available";
 
-            Marker marker = mMap.addMarker(markerOptions);
-            marker.setTag(truckId); // Set truckId as tag for this marker
+                String snippet = operatorName + "|" + menuNames + "|" + businessHours;
+
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(new LatLng(latitude, longitude))
+                        .title(title)
+                        .snippet(snippet);
+
+                Marker marker = mMap.addMarker(markerOptions);
+                marker.setTag(truckId); // Set truckId as tag for this marker
+
+            } catch (NumberFormatException e) {
+                Log.e("FoodTruck", "Error parsing latitude or longitude: " + e.getMessage());
+            }
         }
     };
 
     public Response.ErrorListener onError = error -> {
-        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+        Log.e("VolleyError", "Error fetching data: " + error.getMessage());
+        Toast.makeText(getApplicationContext(), "Error fetching data", Toast.LENGTH_LONG).show();
     };
 
     @Override
