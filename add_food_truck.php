@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
     $name = $_POST['name'];
     $operator_name = $_POST['operator_name'];
     $address = $_POST['address'];
+    $menu_name = $_POST['menu_name'];
     $business_hours = $_POST['business_hours'];
     $latitude = $_POST['latitude'];
     $longitude = $_POST['longitude'];
@@ -77,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
 
         if ($message === '') {
             // Insert the food truck details into the database
-            $sql = "INSERT INTO food_trucks (business_type, name, operator_name, address, business_hours, latitude, longitude, image)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO food_trucks (business_type, name, operator_name, address, menu_name, business_hours, latitude, longitude, image)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssssddds", $business_type, $name, $operator_name, $address, $business_hours, $latitude, $longitude, $image);
+            $stmt->bind_param("ssssssdds", $business_type, $name, $operator_name, $address, $menu_name, $business_hours, $latitude, $longitude, $image);
 
             if ($stmt->execute()) {
                 $message = "Food truck added successfully.";
@@ -218,6 +219,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
             <div class="form-row">
                 <label for="address">Address</label>
                 <input type="text" id="address" name="address" required>
+            </div>
+
+            <div class="form-row">
+                <label for="menu_name">Menu Name</label>
+                <input type="text" id="menu_name" name="menu_name" required>
             </div>
 
             <div class="form-row">
