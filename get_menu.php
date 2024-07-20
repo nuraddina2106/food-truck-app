@@ -8,16 +8,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$truck_id = $_GET['truck_id'];
-$sql = "SELECT * FROM menu WHERE truck_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $truck_id);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql = "SELECT * FROM menus";
+$result = $conn->query($sql);
 
 $menu_items = array();
-while ($row = $result->fetch_assoc()) {
-    $menu_items[] = $row;
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $menu_items[] = $row;
+    }
+} else {
+    echo "No menu items found";
 }
 
 // Return JSON response

@@ -8,6 +8,13 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
     exit();
 }
 
+// Handle logout
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header('Location: login.php'); // Redirect to login page
+    exit();
+}
+
 // Include database connection
 include 'connect.php';
 
@@ -231,8 +238,8 @@ $conn->close();
         <div class="header">
             <button class="menu-btn openbtn" onclick="toggleNav()">&#9776;</button>
             <h1>All Menus</h1>
-            <a href="#" class="logout-btn" onclick="confirmLogout()">Logout</a>
-        </div>
+            <button type="button" class="logout-btn" onclick="confirmLogout()">Logout</button>
+            </div>
 
         <div class="menu">
             <h2>Menu List</h2>
@@ -307,8 +314,8 @@ $conn->close();
         }
 
         function confirmLogout() {
-            if (confirm("Are you sure you want to log out?")) {
-                window.location.href = 'logout.php';
+            if (confirm('Are you sure you want to logout?')) {
+                document.getElementById('logout-form').submit();
             }
         }
     </script>

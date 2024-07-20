@@ -13,6 +13,21 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
 // Initialize message
 $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
+// Handle deletion of a menu item
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['menu_id'])) {
+    $menu_id = intval($_POST['menu_id']);
+
+    // Prepare and execute the delete statement
+    $delete_stmt = $conn->prepare("DELETE FROM menus WHERE menu_id = ?");
+    $delete_stmt->bind_param("i", $menu_id);
+    if ($delete_stmt->execute()) {
+        $message = 'Menu item deleted successfully.';
+    } else {
+        $message = 'Failed to delete menu item.';
+    }
+    $delete_stmt->close();
+}
+
 // Retrieve food truck ID
 $truck_id = isset($_GET['truck_id']) ? intval($_GET['truck_id']) : 0;
 
@@ -208,7 +223,7 @@ $conn->close();
                             <td><img src="<?php echo htmlspecialchars($row['menu_image']); ?>" alt="Image" width="100"></td>
                             <td>
                                 <a href="edit_menu.php?menu_id=<?php echo $row['menu_id']; ?>" class="button button-edit">Edit</a>
-                                <form method="post" action="delete_menu.php" style="display:inline;">
+                                <form method="post" action="" style="display:inline;">
                                     <input type="hidden" name="menu_id" value="<?php echo $row['menu_id']; ?>">
                                     <button type="submit" class="button button-delete">Delete</button>
                                 </form>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2024 at 03:04 AM
+-- Generation Time: Jul 19, 2024 at 05:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,8 +47,8 @@ INSERT INTO `food_trucks` (`truck_id`, `business_type`, `name`, `operator_name`,
 (1, 'Ice cream gula apong', 'Mokti\'s Food Truck', 'Siti Fatimah Adnan', '26, 26A, Jln Kangar Jaya 4, Kangar Jaya, 01000 Kangar, Perlis', '10am - 4pm', 6.407972, 100.180694, 'uploads/mokti.jpg'),
 (2, 'Kebab', 'Kebab Jebat', 'Jebat Ali', 'Jalan Padang Katong, 01000 Kangar, Perlis', '5pm - 11pm', 6.442528, 100.186333, 'uploads/kebabjebat.jpg'),
 (4, 'French fries', 'My Cheezyfries', 'Yusob bin Omar', '58, Jalan Sri Hartamas 3, Taman Desa Sentua, 01000 Kangar, Perlis', '12pm - 12am', 6.412861, 100.202111, 'uploads/cheezyfries.jpg'),
-(5, 'Cafe', 'Block Caife Food Truck', 'Zabidah binti Khalif', 'Jalan Pengkalan Asam, Kampung Pengkalan Asam, 01000 Kangar, Perlis', '5pm - 1am', 6.435833, 100.185139, 'uploads/block.png'),
-(6, 'Chicken and pizza', 'Shala Pizza Food Truck', 'Abu Razak bin Abu Yahya', 'Kampong, 01000 Kangar, Perlis', '3pm - 9pm', 6.440806, 100.180111, 'uploads/shala.jpeg');
+(6, 'pizza', 'Shala Pizza Food Truck', 'Abu Razak bin Abu Yahya', 'Kampong, 01000 Kangar, Perlis', '10am - 9pm', 6.440806, 100.180111, 'uploads/street-food-truck-background_98396-848.jpg'),
+(7, 'Cafe', 'Tff Cafe Food Truck', 'Ali bin Hamad', 'Jalan Dahlia, Taman Ira, 01000 Kangar, Perlis', '10', 6.4367, 100.2047, 'uploads/dde721ffda9cc460203f4af7ad7cbba7.jpg');
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`menu_id`, `truck_id`, `menu_name`, `menu_desc`, `menu_price`, `menu_image`) VALUES
-(1, 2, 'Chicken Shawarma', 'Marinated chicken breast grilled to perfection, served with a blend of lettuce, tomatoes, cucumbers, and a drizzle of garlic sauce. Wrapped in warm pita bread for a delightful experience.', 15.00, 'shawarma.jpg'),
+(1, 2, 'Chicken Shawarma', 'Marinated chicken breast grilled to perfection, served with a blend of lettuce, tomatoes, cucumbers, and a drizzle of garlic sauce. Wrapped in warm pita bread for a delightful experience.', 15.00, 'uploads/shawarma.jpg'),
 (2, 1, 'Cocktail Ice Cream', 'Refreshing and icy vanilla flavour with fruits', 14.90, 'uploads/cocktail ice cream.jpg'),
 (3, 1, 'Harumanis Ice Cream', '100% harum manis ice cream that comes in small tubes 👍👍', 2.00, 'uploads/harumanis ice cream.jpg'),
 (4, 1, 'Soft Apong Ice Cream', 'Signature Flavour 🌟 100% everyone\'s favorite 🥰', 5.50, 'uploads/soft apong.jpg'),
@@ -85,23 +85,13 @@ INSERT INTO `menus` (`menu_id`, `truck_id`, `menu_name`, `menu_desc`, `menu_pric
 (13, 4, 'Ayam Gunting Cheese Tarik', 'Bite-sized pieces of crispy fried chicken (Ayam Gunting) combined with a generous amount of stretchy, melted cheese. Served in a package box for a delicious and easy-to-eat meal.', 15.00, 'uploads/ayam gunting.jpg'),
 (14, 4, 'Enoki Mushroom Crunchy', 'Crispy battered enoki mushrooms offering a delightful crunch with every bite. Served in a package box, ideal for a light and tasty snack.', 10.00, 'uploads/enoki.jpg'),
 (15, 4, 'Crab Rangoon', 'Creamy and savory crab filling wrapped in a crispy wonton shell, perfect for a flavorful snack. Served in a package box for convenience.', 13.00, 'uploads/crab ragoon.jpg'),
-(16, 5, 'Belgian Waffle', 'A classic Belgian waffle with a crisp exterior and a fluffy interior, topped with a dusting of powdered sugar. Served with a side of maple syrup and fresh berries for a delightful breakfast treat.', 10.00, 'uploads/belgian waffle.jpg'),
-(17, 5, 'Chocolate Chip Waffle', 'A delicious waffle infused with chocolate chips, providing a perfect blend of crispy and melty textures in every bite. Drizzled with chocolate sauce and served with whipped cream.', 12.00, 'uploads/choco chip waffle.jpg'),
-(18, 5, 'Strawberry Waffle', 'A golden waffle topped with fresh strawberries and a generous dollop of whipped cream. Finished with a drizzle of strawberry sauce for a sweet and refreshing treat.', 14.00, 'uploads/strawberry waffle.jpeg'),
-(19, 5, 'Grilled Salmon Sandwich', 'A perfectly grilled salmon fillet, served with fresh lettuce, tomatoes, and cucumber slices, all layered between two slices of toasted whole grain bread. Accompanied by a creamy dill sauce for an extra burst of flavor.', 20.00, 'uploads/grilled salmon sandwich.jpg'),
-(20, 5, 'Grilled Chicken Sandwich', 'Tender grilled chicken breast, topped with lettuce, tomato, and a slice of cheddar cheese, all nestled between a toasted bun. Accompanied by a side of honey mustard sauce.', 18.00, 'uploads/grilled chicken sandwich.jpg'),
-(21, 5, 'Glazed Donut', 'A classic, light, and fluffy donut covered in a sweet, glossy glaze. Perfectly simple and delicious for any time of the day.', 5.00, 'uploads/glazed donut.jpg'),
-(22, 5, 'Chocolate Frosted Donut', 'A soft, airy donut topped with rich chocolate frosting and colorful sprinkles. A delightful treat for chocolate lovers.', 6.00, 'uploads/chocolate donut.jpg'),
-(23, 5, 'Iced Latte', 'A refreshing blend of espresso and chilled milk, served over ice. Perfectly balanced and smooth, ideal for a hot day.', 8.00, 'uploads/iced latte.jpg'),
-(24, 5, 'Strawberry Smoothie', 'A creamy and refreshing smoothie made with fresh strawberries, yogurt, and a touch of honey. A perfect drink to energize your day.', 10.00, 'uploads/strawberry smoothie.jpg'),
-(25, 5, 'Classic Lemonade', 'A thirst-quenching drink made with freshly squeezed lemons, water, and just the right amount of sugar. Served chilled with ice for a revitalizing beverage.', 7.00, 'uploads/classic lemonade.jpeg'),
 (26, 6, 'Classic Crust Beef Meatballs & Pepperoni', 'Hand tossed classic crust', 15.00, 'uploads/meatball pepperoni.jpg'),
 (27, 6, 'Baked Macaroni Cheese', 'Chef recommended', 20.90, 'uploads/macaroni.jpg'),
 (28, 6, 'Deli Smoked Chicken Wing', 'Chef recommended', 23.90, 'uploads/deli chicken.jpg'),
 (29, 6, 'Spicy Chicken Popcorn Salad', 'A delicious mix of crispy popcorn chicken and fresh greens, tossed with colorful vegetables and a zesty dressing. Perfectly spicy and refreshing, it’s a satisfying salad for any meal!', 13.90, 'uploads/salad.jpg'),
 (30, 6, 'Carbonara Spaghetti', 'Classic Italian pasta dish made with creamy sauce, pancetta, and Parmesan cheese, creating a rich and flavorful experience in every bite.', 18.90, 'uploads/carbonara spaghetti.jpg'),
 (31, 6, 'Beef Meatball Spaghetti', 'Hearty spaghetti topped with savory beef meatballs simmered in a rich tomato sauce. A comforting and filling meal that\'s sure to satisfy!', 18.90, 'uploads/beef spaghetti.jpg'),
-(32, 6, 'Chicken Bolognese Spaghetti', 'Delicious spaghetti served with a flavorful chicken Bolognese sauce, made with ground chicken, tomatoes, and herbs. A lighter twist on a traditional favorite!', 18.90, 'uploads/chicken bolognese.jpeg');
+(33, 7, 'Chocolate Chip Milkshake', 'The Choco Chip Milkshake is a rich chocolate milkshake swirled with chocolate syrup and topped with chocolate chips and whipped cream, served in a clear cup with the cafe\'s logo.', 10.00, '0');
 
 --
 -- Indexes for dumped tables
@@ -128,13 +118,13 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `food_trucks`
 --
 ALTER TABLE `food_trucks`
-  MODIFY `truck_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `truck_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables

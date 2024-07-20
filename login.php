@@ -45,19 +45,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             height: 100vh;
             background: #f0f0f0;
             margin: 0;
+            flex-direction: row;
         }
-        .login-container {
+        .logo {
+            margin-right: 20px; /* Space between logo and container */
+            flex: 0 0 auto; /* Ensure logo doesn't grow */
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 100%; /* Make logo height match container height */
+            width: auto;  /* Maintain aspect ratio */
+            max-height: 300px; /* Ensure logo doesn't exceed a maximum height */
+        }
+        .container {
+            display: flex;
+            align-items: center;
             background: #fff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Adjust as needed */
             width: 100%;
-            max-width: 400px;
-            text-align: center;
+        }
+        .login-container {
+            width: 100%;
         }
         .login-container h2 {
             margin-bottom: 20px;
             color: #007bff; /* Default blue */
+            text-align: center;
         }
         .login-container label {
             display: block;
@@ -96,22 +113,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .error {
             color: #ff0000; /* Red for errors */
             margin-bottom: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <?php if (isset($error)): ?>
-            <p class="error"><?php echo htmlspecialchars($error); ?></p>
-        <?php endif; ?>
-        <form method="post" action="">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
-        </form>
+    <div class="logo">
+        <img src="icon_truck.jpg" alt="Food Truck Logo">
+    </div>
+    <div class="container">
+        <div class="login-container">
+            <h2>Login</h2>
+            <?php if (isset($error)): ?>
+                <p class="error"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
+            <form method="post" action="">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" value="Login">
+            </form>
+        </div>
     </div>
 </body>
 </html>

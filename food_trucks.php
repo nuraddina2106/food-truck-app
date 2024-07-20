@@ -269,7 +269,7 @@ $result = $conn->query($sql);
 
         function confirmLogout() {
             if (confirm('Are you sure you want to logout?')) {
-                document.querySelector('.logout-btn').closest('form').submit();
+                document.getElementById('logout-form').submit();
             }
         }
     </script>
@@ -292,7 +292,10 @@ $result = $conn->query($sql);
         <div class="header">
             <button class="menu-btn openbtn" onclick="toggleNav()">&#9776;</button>
             <h1>Food Truck Management</h1>
-            <a href="#" class="logout-btn" onclick="confirmLogout()">Logout</a>
+            <form method="post" action="" id="logout-form" style="display: inline;">
+                <input type="hidden" name="logout" value="1">
+                <button type="button" class="logout-btn" onclick="confirmLogout()">Logout</button>
+            </form>
         </div>
 
         <div class="menu">
@@ -302,7 +305,7 @@ $result = $conn->query($sql);
 
         <div class="container">
             <?php if (!empty($message)) { ?>
-                <div class="message"><?php echo $message; ?><a href="#" class="close">&times;</a></div>
+                <div class="message"><?php echo htmlspecialchars($message); ?><a href="#" class="close">&times;</a></div>
             <?php } ?>
 
             <table class="food-truck-table">
