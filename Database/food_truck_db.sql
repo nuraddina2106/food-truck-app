@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2024 at 12:22 PM
+-- Generation Time: Jul 20, 2024 at 03:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,10 +48,8 @@ INSERT INTO `food_trucks` (`truck_id`, `business_type`, `name`, `operator_name`,
 (1, 'Ice cream gula apong', 'Mokti\'s Food Truck', 'Siti Fatimah Adnan', '26, 26A, Jln Kangar Jaya 4, Kangar Jaya, 01000 Kangar, Perlis', 'Chocolate, Vanilla, Mint Chocolate Ice Cream', '10am - 4pm', 6.407972, 100.180694, 'uploads/mokti.jpg'),
 (2, 'Kebab', 'Kebab Jebat', 'Jebat Ali', 'Jalan Padang Katong, 01000 Kangar, Perlis', 'Kebab', '5pm - 11pm', 6.442528, 100.186333, 'uploads/kebabjebat.jpg'),
 (4, 'French fries', 'My Cheezyfries', 'Yusob bin Omar', '58, Jalan Sri Hartamas 3, Taman Desa Sentua, 01000 Kangar, Perlis', 'Fast Food', '12pm - 12am', 6.412861, 100.202111, 'uploads/557d22d0f8343fa24c578071ee7fa867.jpg'),
-(5, 'Cafe', 'Block Caife Food Truck', 'Zabidah binti Khalif', 'Jalan Pengkalan Asam, Kampung Pengkalan Asam, 01000 Kangar, Perlis', 'Coffee, Dessert', '5pm - 1am', 6.435833, 100.185139, 'uploads/block.png'),
 (6, 'Chicken and pizza', 'Shala Pizza Food Truck', 'Abu Razak bin Abu Yahya', 'Kampong, 01000 Kangar, Perlis', 'Pizza', '3pm - 9pm', 6.440806, 100.180111, 'uploads/shala.jpeg'),
-(7, 'try', 'try', 'try', 'try', 'try', '8am - 9pm', 34, 100.9, 'uploads/cc0f28f9c9a673913a456e064f169c1c.gif'),
-(8, 'udang sambal', 'ok', 'ko', '818, JALAN CIKU, TAMAN SURIANI', 'Choco Chip Milkshake', '8mlm', 6.3, 100.26, 'uploads/weather.jpg');
+(9, 'Cafe', 'Block Caife Food Truck', 'Zabidah binti Khalif', 'Jalan Pengkalan Asam, Kampung Pengkalan Asam, 01000 Kangar, Perlis', 'Coffee, Dessert', '8pm - 1am', 6.435833, 100.185139, 'uploads/187f59352b6b090eada2e98a3ded6a7e.png');
 
 --
 -- Indexes for dumped tables
@@ -71,7 +69,7 @@ ALTER TABLE `food_trucks`
 -- AUTO_INCREMENT for table `food_trucks`
 --
 ALTER TABLE `food_trucks`
-  MODIFY `truck_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `truck_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
